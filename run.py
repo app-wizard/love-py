@@ -21,13 +21,17 @@ def get_sales_data():
     """
     Get data
     """
-    print("Please enter sales data")
-    print("Example: 10,20,30,40,50,60\n")
-    data_str = input("Enter your data here: ")
+    while True:
+        print("Please enter sales data")
+        print("Example: 10,20,30,40,50,60\n")
+        data_str = input("Enter your data here: ")
 
-    sales_data = data_str.split(",")
-    validate_data(sales_data)
+        sales_data = data_str.split(",")
 
+        if validate_data(sales_data):
+            print('Data OK')
+            break
+    return sales_data
 
 def validate_data(values):
     """
@@ -39,7 +43,11 @@ def validate_data(values):
             raise ValueError(
                 f"Exaxly 6 values required. You provided {len(values)} values")
     except ValueError as e:
+        print("======================================================")
         print(f"Invalid data {e} \n")
+        print("======================================================")
+        return False
+    return True
 
 
-get_sales_data()
+data = get_sales_data()
